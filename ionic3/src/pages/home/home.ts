@@ -1,30 +1,47 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { UsuarioProvider } from "../../providers/usuario/usuario";
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
+import {UsuarioProvider} from "../../providers/usuario/usuario";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
-  providers:[
-      UsuarioProvider,
-  ]
+    selector: 'page-home',
+    templateUrl: 'home.html',
+    providers: [
+        UsuarioProvider,
+    ]
 })
 export class HomePage {
 
-  public usuarios = [];
+    public usuarios = [];
 
-  public usuarioCadastro = {"nome":"", "idade":null};
+    public usuarioCadastro = {
+        "_id": "",
+        "nome": "",
+        "idade": null
+    };
 
-  constructor(public navCtrl: NavController, private usuarioService: UsuarioProvider) {
-    this.getUsuarios();
-  }
+    constructor(public navCtrl: NavController, private usuarioService: UsuarioProvider) {
+        this.getUsuarios();
+    }
 
-  public getUsuarios() {
-    this.usuarioService.findAll().subscribe(response => this.usuarios = response);
-  }
+    public getUsuarios() {
+        this.usuarioService.findAll().subscribe(response => this.usuarios = response);
+    }
 
-  public salvarUsuario() {
-      this.usuarioService.salvar(this.usuarioCadastro).subscribe(response => this.getUsuarios());
-  }
+    public salvarUsuario() {
+
+        if (this.usuarioCadastro._id == "") {
+            this.usuarioService.salvar(this.usuarioCadastro).subscribe(response => this.getUsuarios());
+        } else {
+            this.usuarioService.editar(this.usuarioCadastro).subscribe(response => this.getUsuarios());
+        }
+    }
+
+    public popularForm(usuario) {
+        this.usuarioCadastro = usuario;
+    }
+
+    public deletar(id) {
+        this.usuarioService.deletar(id).subscribe(response => this.getUsuarios());
+    }
 
 }

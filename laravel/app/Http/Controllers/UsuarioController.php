@@ -70,7 +70,8 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Usuario::find($id)->update($request->all());
+        return $request->all();
     }
 
     /**
@@ -81,6 +82,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Usuario::find($id)->delete();
+        
+        return Usuario::all();
     }
 }
