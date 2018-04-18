@@ -1,30 +1,36 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            Ionic Blank
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <form (ngSubmit)="salvarUsuario()">
-        <ion-item>
-            <ion-label>Nome</ion-label>
-            <ion-input type="text" [(ngModel)]="usuarioCadastro.nome" name="nome"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label>Idade</ion-label>
-            <ion-input [(ngModel)]="usuarioCadastro.idade" name="idade"></ion-input>
-        </ion-item>
-        <button ion-button type="submit" block>Salvar</button>
-    </form>
+  <form (ngSubmit)="salvarUsuario()">
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="usuarioCadastro.nome" name="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Idade</ion-label>
+      <ion-input [(ngModel)]="usuarioCadastro.idade" name="idade"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Perfil</ion-label>
+      <ion-select [(ngModel)]="usuarioCadastro.perfil" name="perfil">
+        <ion-option *ngFor="let perfil of perfis" [value]="perfil">{{ perfil.nome }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-button type="submit" block>Salvar</button>
+  </form>
 
-    <ion-list *ngFor="let usuario of usuarios">
-        <ion-item>{{ usuario.nome }} - {{ usuario.idade }}
-            <button (click)="popularForm(usuario)" ion-button color="light">Editar</button>
-            <button (click)="deletar(usuario._id)" ion-button color="danger">Excluir</button>
-        </ion-item>
-    </ion-list>
-    
+  <ion-list *ngFor="let usuario of usuarios">
+    <ion-item>{{ usuario.nome }} - {{ usuario.idade }} - {{ usuario.perfil.nome }}
+      <button (click)="popularForm(usuario)" ion-button color="light">Editar</button>
+      <button (click)="deletar(usuario._id)" ion-button color="danger">Excluir</button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
