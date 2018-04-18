@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuario;
+use App\Perfil;
 
-class UsuarioController extends Controller
+class PerfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return Usuario::all();
+        return Perfil::all();
     }
 
     /**
@@ -24,8 +24,8 @@ class UsuarioController extends Controller
      */
     public function create(Request $request)
     {
-        Usuario::create($request->all());
-        return Usuario::orderBy('created_at', 'desc')->first();
+        Perfil::create($request->all());
+        return Perfil::orderBy('created_at', 'desc')->first();
     }
 
     /**
@@ -70,7 +70,7 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Usuario::find($id)->update($request->all());
+        Perfil::find($id)->update($request->all());
         return $request->all();
     }
 
@@ -82,8 +82,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        Usuario::find($id)->delete();
+        Perfil::find($id)->delete();
         
-        return Usuario::all();
+        return Perfil::all();
     }
 }
